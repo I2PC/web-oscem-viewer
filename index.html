@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer for processing metadata</title>
+    <style>
+        #json-container {
+            margin-top: 20px;
+        }
+        .item {
+            margin-bottom: 10px;
+        }
+        .key {
+            font-weight: bold;
+        }
+        .nested-container {
+            margin-left: 20px;
+            border-left: 1px dashed #ccc;
+            padding-left: 10px;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the tooltip symbol */
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Processing metadata</h1>
+
+    <!-- container where JSON data will be inserted and displayed -->
+    <div id="json-container"></div>
+
+    <!-- file that contains the logic to fetch, process, and display the JSON data within the #json-container div -->
+    <script src="viewer-cryoem-cnb.js"></script>
+</body>
+</html>
+
