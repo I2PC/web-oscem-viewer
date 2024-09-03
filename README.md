@@ -7,4 +7,4 @@ $ cd web-oscem-viewer
 
 $ python -m http.server 8010
 
-Then, open file on http://localhost:8009 on your browser.
+Then, open file on http://localhost:8010 on your browser.
