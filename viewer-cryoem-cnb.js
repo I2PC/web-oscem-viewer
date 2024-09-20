@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         keyValue.innerHTML = `<span class="key">${key}:</span> `;
                     }
 
-                    if (typeof value === 'string' && value.endsWith('.png')) {
+                    if (typeof value === 'string' && (value.endsWith('.png') || value.endsWith('.jpg'))) {
                         // Handle images
                         const imgElement = document.createElement('img');
                         imgElement.src = `data/${value}`;
