@@ -34,7 +34,8 @@
             "Output_max_defocus": 11850.8,
             "Output_min_defocus": 1469.9,
             "Output_avg_defocus": 1723.3,
-            "Defocus_histogram": "defocus_hist.png"
+            "Defocus_histogram": "defocus_hist.png",
+            "Micrograph_examples": "Micro_examples/micro_defocus.png"
         },
         "Resolution_(Å)": {
             "Output_max_resolution": 5.2,
@@ -49,7 +50,8 @@
     "Particle_picking": {
         "Number_particles": 2860,
         "Particles_per_micrograph": 136.2,
-        "Particles_histogram": "particles_hist.png"
+        "Particles_histogram": "particles_hist.png",
+        "Micrograph_examples": "Micro_examples/micro_particles.jpg"
     },
     "Classes_2D": {
         "Number_classes_2D": 49,
