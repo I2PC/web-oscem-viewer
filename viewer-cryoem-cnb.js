@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const jsonFilePath = 'data/Processing_json.json'; // Path to your JSON file
+    const jsonFilePath = 'data/Processing_metadata.json'; // Path to your JSON file
 
     fetch(jsonFilePath) // Initiates a network request to retrieve the JSON file from the specified path
         .then(response => {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         keyValue.innerHTML = `<span class="key">${key}:</span> `;
                     }
 
-                    if (typeof value === 'string' && (value.endsWith('.png') || value.endsWith('.jpg'))) {
+                    if (typeof value === 'string' && value.endsWith('.jpg')) {
                         // Handle images
                         const imgElement = document.createElement('img');
                         imgElement.src = `data/${value}`;
