@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Map for tooltip texts
     const tooltipTexts = {
         'astigmatism': 'Astigmatism was calculated using the defocus ratio method.',
-        'images_classes_3d': 'Images show central section.'
+        'images_classes_3d': 'Images show central section.',
+        'defocus_mic_examples': 'Micrographs are shown in increasing order of defocus',
+        'particles_mic_examples': 'Micrographs are shown in decreasing order of particle number'
     };
 
     // Function to display JSON data in a text format
