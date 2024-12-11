@@ -52,10 +52,10 @@ CTFs:
         micrograph_examples: Micro_examples/micro_defocus.jpg
     resolution:
         output_min_resolution:
-            value: 2.8
+            value: 3.9
             unit: Å
         output_max_resolution:
-            value: 3.9
+            value: 2.8
             unit: Å
         output_avg_resolution:
             value: 3.3
@@ -104,7 +104,7 @@ classes3D:
             orthogonal_slices_Z: Classes_3D/orthogonal_slices_volume1/orthogonal_slices_Z.jpg
         isosurface_images:
             front_view: Classes_3D/isosurface_images_volume1/front_view.jpg
-            dide_view: Classes_3D/isosurface_images_volume1/side_view.jpg
+            side_view: Classes_3D/isosurface_images_volume1/side_view.jpg
             top_view: Classes_3D/isosurface_images_volume1/top_view.jpg
 volumes:
 -   volume_type: initial volume
@@ -124,9 +124,9 @@ volumes:
         orthogonal_slices_Y: Final_volume/orthogonal_slices/orthogonal_slices_Y.jpg
         orthogonal_slices_Z: Final_volume/orthogonal_slices/orthogonal_slices_Z.jpg
     isosurface_images:
-        Front_view: Final_volume/isosurface_images/front_view.jpg
-        Side_view: Final_volume/isosurface_images/side_view.jpg
-        Top_view: Final_volume/isosurface_images/top_view.jpg
+        front_view: Final_volume/isosurface_images/front_view.jpg
+        side_view: Final_volume/isosurface_images/side_view.jpg
+        top_view: Final_volume/isosurface_images/top_view.jpg
 -   volume_type: sharpened volume
     orthogonal_slices:
         orthogonal_slices_X: Sharpened_volume/orthogonal_slices/orthogonal_slices_X.jpg
