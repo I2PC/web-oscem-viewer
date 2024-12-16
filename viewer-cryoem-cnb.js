@@ -136,16 +136,51 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Handle arrays inside YAML
                         const arrayContainer = document.createElement('div');
                         arrayContainer.className = 'array-container';
-                        value.forEach((item, index) => {
-                            const arrayItem = document.createElement('div');
-                            arrayItem.className = 'array-item';
-                            arrayItem.textContent = `Item ${index + 1}: `;
-                            displayYamlAsText(item, arrayItem, false);
-                            arrayContainer.appendChild(arrayItem);
-                        });
+
+                        if (key === 'descriptors' ) {
+                            value.forEach((item, index) => {
+                                const arrayItem = document.createElement('div');
+                                arrayItem.className = 'array-item';
+                                arrayItem.textContent = `descriptor ${index + 1}: `;
+                                arrayItem.style.paddingLeft = '20px';
+                                arrayContainer.appendChild(arrayItem);
+
+                                const innerContainer = document.createElement('div');
+                                innerContainer.style.paddingLeft = '40px';
+                                displayYamlAsText(item, innerContainer, false);
+                                arrayContainer.appendChild(innerContainer);
+                            });
+                        } else if (key === 'volumes') {
+                            value.forEach((volume, index) => {
+                                const arrayItem = document.createElement('div');
+                                arrayItem.className = 'array-item';
+                                arrayItem.textContent = `volume ${index + 1}:`;
+                                arrayItem.style.paddingLeft = '20px';
+                                arrayContainer.appendChild(arrayItem);
+
+                                const volumeContentContainer = document.createElement('div');
+                                volumeContentContainer.style.paddingLeft = '40px';
+                                displayYamlAsText(volume, volumeContentContainer, false);
+                                arrayContainer.appendChild(volumeContentContainer);
+                            });
+                        } else {
+                            value.forEach((item, index) => {
+                                const arrayItem = document.createElement('div');
+                                arrayItem.className = 'array-item';
+                                arrayItem.textContent = `Item ${index + 1}: `;
+                                arrayItem.style.paddingLeft = '20px';
+                                arrayContainer.appendChild(arrayItem);
+
+                                const innerContainer = document.createElement('div');
+                                innerContainer.style.paddingLeft = '40px';
+                                displayYamlAsText(item, innerContainer, false);
+                                arrayContainer.appendChild(innerContainer);
+                            });
+                        }
+
                         keyValue.appendChild(arrayContainer);
                     } else {
-                        keyValue.innerHTML += ` ${value}`; // Append value to existing content
+                        keyValue.innerHTML += ` ${value}`;
                     }
 
                     container.appendChild(keyValue);
