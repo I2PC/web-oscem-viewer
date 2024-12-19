@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const jsonFilePath = 'data/Processing_metadata.json'; // Path to your JSON file
+    const yamlFilePath = 'data/Processing_metadata.yaml'; // Path to your YAML file
 
-    fetch(jsonFilePath) // Initiates a network request to retrieve the JSON file from the specified path
+    fetch(yamlFilePath) // Initiates a network request to retrieve the YAML file
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error when loading JSON file');
+                throw new Error('Error when loading YAML file');
             }
-            return response.json(); // Convert the response to JSON
+            return response.text(); // Read the response as text (YAML format)
         })
-        .then(json => {
+        .then(yamlText => {
+            const json = jsyaml.load(yamlText); // Convert YAML to JSON
             const container = document.getElementById('json-container');
             container.innerHTML = ''; // Clear any existing content
-            displayJsonAsText(json, container, true); // Render the JSON data with top-level sections
+            displayYamlAsText(json, container, true); // Render the YAML data with top-level sections
         })
         .catch(error => {
             document.getElementById('json-container').textContent = 'Error: ' + error.message;
@@ -25,11 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
         'particles_mic_examples': 'Micrographs are shown in decreasing order of particle number'
     };
 
-    // Function to display JSON data in a text format
-    function displayJsonAsText(json, container, isSection = false) {
-        if (typeof json === 'object' && json !== null) {
-            Object.keys(json).forEach(key => {
-                const value = json[key];
+
+    // Function to display YAML data as text format
+    function displayYamlAsText(yaml, container, isSection = false) {
+        if (typeof yaml === 'object' && yaml !== null) {
+            Object.keys(yaml).forEach(key => {
+                const value = yaml[key];
                 const keyValue = document.createElement('div');
                 keyValue.className = 'item';
 
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     container.appendChild(nestedContainer);
 
                     // Process the nested objects
-                    displayJsonAsText(value, nestedContainer, false);
+                    displayYamlAsText(value, nestedContainer, false);
                 } else {
                     const normalizedKey = key.toLowerCase();
                     let hasTooltip = false;
@@ -76,7 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         keyValue.innerHTML = `<span class="key">${key}:</span> `;
                     }
 
-                    if (typeof value === 'string' && value.endsWith('.jpg')) {
+                    if (Array.isArray(value) && key.toLowerCase() === 'particles_per_class') {
+                        // Handle 'particles_per_class' as a comma-separated list
+                        keyValue.innerHTML += `<span class="value">${value.join(', ')}</span>`;
+
+                    } else if (typeof value === 'string' && value.endsWith('.jpg')) {
                         // Handle images
                         const imgElement = document.createElement('img');
                         imgElement.src = `data/${value}`;
@@ -124,17 +130,66 @@ document.addEventListener('DOMContentLoaded', function() {
                         const nestedContainer = document.createElement('div');
                         nestedContainer.className = 'nested-container';
                         keyValue.appendChild(nestedContainer);
-                        displayJsonAsText(value, nestedContainer, false);
+                        displayYamlAsText(value, nestedContainer, false);
+
+                    } else if (value && typeof value === 'object' && Array.isArray(value)) {
+                        // Handle arrays inside YAML
+                        const arrayContainer = document.createElement('div');
+                        arrayContainer.className = 'array-container';
+
+                        if (key === 'descriptors' ) {
+                            value.forEach((item, index) => {
+                                const arrayItem = document.createElement('div');
+                                arrayItem.className = 'array-item';
+                                arrayItem.textContent = `descriptor ${index + 1}: `;
+                                arrayItem.style.paddingLeft = '20px';
+                                arrayContainer.appendChild(arrayItem);
+
+                                const innerContainer = document.createElement('div');
+                                innerContainer.style.paddingLeft = '40px';
+                                displayYamlAsText(item, innerContainer, false);
+                                arrayContainer.appendChild(innerContainer);
+                            });
+                        } else if (key === 'volumes') {
+                            value.forEach((volume, index) => {
+                                const arrayItem = document.createElement('div');
+                                arrayItem.className = 'array-item';
+                                arrayItem.textContent = `volume ${index + 1}:`;
+                                arrayItem.style.paddingLeft = '20px';
+                                arrayContainer.appendChild(arrayItem);
+
+                                const volumeContentContainer = document.createElement('div');
+                                volumeContentContainer.style.paddingLeft = '40px';
+                                displayYamlAsText(volume, volumeContentContainer, false);
+                                arrayContainer.appendChild(volumeContentContainer);
+                            });
+                        } else {
+                            value.forEach((item, index) => {
+                                const arrayItem = document.createElement('div');
+                                arrayItem.className = 'array-item';
+                                arrayItem.textContent = `Item ${index + 1}: `;
+                                arrayItem.style.paddingLeft = '20px';
+                                arrayContainer.appendChild(arrayItem);
+
+                                const innerContainer = document.createElement('div');
+                                innerContainer.style.paddingLeft = '40px';
+                                displayYamlAsText(item, innerContainer, false);
+                                arrayContainer.appendChild(innerContainer);
+                            });
+                        }
+
+                        keyValue.appendChild(arrayContainer);
                     } else {
-                        keyValue.innerHTML += ` ${value}`; // Append value to existing content
+                        keyValue.innerHTML += ` ${value}`;
                     }
 
                     container.appendChild(keyValue);
                 }
             });
         } else {
-            container.textContent = 'The JSON is not an object or is empty.';
+            container.textContent = 'The YAML is not an object or is empty.';
         }
     }
 
 });
+
