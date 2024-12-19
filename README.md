@@ -1,10 +1,16 @@
-# web-oscem-viewer
-Viewer for metadata json file of cryo-em processing workflow.
+# **web-oscem-viewer**
+A web-based viewer for metadata JSON files of Cryo-EM processing workflows.
 
-To view the demo, get inside this repo's dir and serve index.html via http:
+---
 
-$ cd web-oscem-viewer
+## **Demo Instructions**
 
-$ python -m http.server 8010
+To view the demo:
 
-Then, open file on http://localhost:8010 on your browser.
+1. Navigate to the repository directory:
+   ```bash
+   cd web-oscem-viewer
+2. Serve the index.html file via HTTP:
+   ```bash
+   cd web-oscem-viewer
+3. Open the viewer in your browser at: http://localhost:8010
