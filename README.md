@@ -12,5 +12,5 @@ To view the demo:
    cd web-oscem-viewer
 2. Serve the index.html file via HTTP:
    ```bash
-   cd web-oscem-viewer
+   python -m http.server 8010
 3. Open the viewer in your browser at: http://localhost:8010
