@@ -5,35 +5,37 @@ movies:
     gain_image: gain.jpg
     descriptors:
     -   descriptor_name: XmippProtFlexAlign
-        binning_factor: 1.0
-        maximum_resolution:
-            value: 30.0
-            unit: Å
-        frames_aligned:
-            frame0: 1
-            frameN: 30
-        output_avg_shift:
-            value: 11.8
-            unit: Å
-        output_max_shift:
-            value: 34.1
-            unit: Å
+        descriptor_thing:
+            binning_factor: 1.0
+            maximum_resolution:
+                value: 30.0
+                unit: Å
+            frames_aligned:
+                frame0: 1
+                frameN: 30
+            output_avg_shift:
+                value: 11.8
+                unit: Å
+            output_max_shift:
+                value: 34.1
+                unit: Å
     -   descriptor_name: XmippProtMovieMaxShift
-        discarded_movies: 9
-        max_frame_shift:
-            value: 5.0
-            unit: Å
-        max_movie_shift:
-            value: 20.0
-            unit: Å
-        rejection_type: by frame or movie
-        output_avg_shift:
-            value: 11.8
-            unit: Å
-        output_max_shift:
-            value: 29.7
-            unit: Å
-        shift_histogram: shift_hist.jpg
+        descriptor_thing:
+            discarded_movies: 9
+            max_frame_shift:
+                value: 5.0
+                unit: Å
+            max_movie_shift:
+                value: 20.0
+                unit: Å
+            rejection_type: by frame or movie
+            output_avg_shift:
+                value: 11.8
+                unit: Å
+            output_max_shift:
+                value: 29.7
+                unit: Å
+            shift_histogram: shift_hist.jpg
 micrographs:
     number_micrographs: 21
 CTFs:
