@@ -1,16 +1,16 @@
 # **web-oscem-viewer**
-A web-based viewer for metadata JSON files of Cryo-EM processing workflows.
+A web-based viewer for Cryo-EM processing workflow metadata in YAML format.
 
 ---
 
 ## **Demo Instructions**
 
-To view the demo:
+To run the demo:
 
-1. Navigate to the repository directory:
+1. Install the required dependency:
    ```bash
-   cd web-oscem-viewer
-2. Serve the index.html file via HTTP:
+   pip install streamlit
+2. Launch the viewer:
    ```bash
-   python -m http.server 8010
-3. Open the viewer in your browser at: http://localhost:8010
+   streamlit run viewer-cryoem-cnb.py
+3. Your default browser should automatically open the application. If not, you can access it manually at http://localhost:8501.
