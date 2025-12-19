@@ -1,11 +1,12 @@
+import argparse
+from pathlib import Path
 import streamlit as st
 import yaml
-from pathlib import Path
 from PIL import Image
-import base64
 from io import BytesIO
+import base64
 
-# --- ESTILOS PERSONALIZADOS ---
+# --- STYLES ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
@@ -75,7 +76,7 @@ tooltips = {
     'particles_mic_examples': 'Micrographs are shown in decreasing order of particle number'
 }
 
-# --- FUNCIONES AUXILIARES ---
+
 def image_to_base64(image_path):
     img = Image.open(image_path)
     buffered = BytesIO()
@@ -96,7 +97,6 @@ def format_key(key: str) -> str:
 def display_node(key, value, level=0, is_last=True):
     tooltip = tooltips.get(key.lower(), "")
 
-    # --- Títulos personalizados ---
     if key.lower() == "classes2d":
         formatted_key = "Classes 2D"
     elif key.lower() == "classes3d":
@@ -104,7 +104,7 @@ def display_node(key, value, level=0, is_last=True):
     else:
         formatted_key = format_key(key)
 
-    # --- Nivel 0 (Processing): caja principal ---
+    # --- Level 0 (Processing) ---
     if level == 0:
         st.markdown(
             f"<div style='background:#dce6f0; padding:16px; margin-bottom:20px; "
@@ -120,7 +120,7 @@ def display_node(key, value, level=0, is_last=True):
         st.markdown("</div>", unsafe_allow_html=True)
         return
 
-    # --- Nivel 1 (movies, CTFs, etc.): caja secundaria ---
+    # --- Level 1 (movies, CTFs, etc.) ---
     if level == 1:
         st.markdown(
             f"<div style='background:#f5f7fa; padding:12px; margin-bottom:16px; "
@@ -141,7 +141,7 @@ def display_node(key, value, level=0, is_last=True):
         st.markdown("</div>", unsafe_allow_html=True)
         return
 
-    # --- Niveles > 1: árbol normal (con indentación y prefijo) ---
+    # --- Levels > 1 ---
     prefix = get_prefix(level, is_last)
 
     if isinstance(value, dict):
@@ -168,7 +168,7 @@ def display_node(key, value, level=0, is_last=True):
                 display_node(f"{key} [{i}]", item, level + 1, i == len(value) - 1)
 
     elif isinstance(value, str) and value.lower().endswith(".jpg"):
-        img_path = Path("data") / value
+        img_path = data_dir / value
         if img_path.exists():
             img_base64 = image_to_base64(img_path)
             img_html = f"<img src='data:image/jpeg;base64,{img_base64}' class='zoom-img' alt='{value}'>"
@@ -190,7 +190,20 @@ def display_node(key, value, level=0, is_last=True):
         )
 
 # --- MAIN ---
-yaml_path = "data/Processing_metadata.yaml"
+# --- PARSE CLI ARGUMENTS ---
+parser = argparse.ArgumentParser(description="Viewer CryoEM Metadata")
+parser.add_argument(
+    "-d", "--data", type=str, required=True,
+    help="Path to folder containing Processing_metadata.yaml and images"
+)
+args = parser.parse_args()
+
+data_dir = Path(args.data)
+yaml_path = data_dir / "Processing_metadata.yaml"
+
+if not yaml_path.exists():
+    st.error(f"YAML file not found in {data_dir}")
+    st.stop()
 st.markdown(
     "<div style='font-size:36px; font-weight:700; color:#2c3e50; margin-bottom:24px;'>Metadata Viewer</div>",
     unsafe_allow_html=True
