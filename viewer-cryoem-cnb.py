@@ -1,9 +1,10 @@
+import argparse
+from pathlib import Path
 import streamlit as st
 import yaml
-from pathlib import Path
 from PIL import Image
-import base64
 from io import BytesIO
+import base64
 
 # --- STYLES ---
 st.markdown("""
@@ -167,7 +168,7 @@ def display_node(key, value, level=0, is_last=True):
                 display_node(f"{key} [{i}]", item, level + 1, i == len(value) - 1)
 
     elif isinstance(value, str) and value.lower().endswith(".jpg"):
-        img_path = Path("data") / value
+        img_path = data_dir / value
         if img_path.exists():
             img_base64 = image_to_base64(img_path)
             img_html = f"<img src='data:image/jpeg;base64,{img_base64}' class='zoom-img' alt='{value}'>"
@@ -189,7 +190,20 @@ def display_node(key, value, level=0, is_last=True):
         )
 
 # --- MAIN ---
-yaml_path = "data/Processing_metadata.yaml"
+# --- PARSE CLI ARGUMENTS ---
+parser = argparse.ArgumentParser(description="Viewer CryoEM Metadata")
+parser.add_argument(
+    "-d", "--data", type=str, required=True,
+    help="Path to folder containing Processing_metadata.yaml and images"
+)
+args = parser.parse_args()
+
+data_dir = Path(args.data)
+yaml_path = data_dir / "Processing_metadata.yaml"
+
+if not yaml_path.exists():
+    st.error(f"YAML file not found in {data_dir}")
+    st.stop()
 st.markdown(
     "<div style='font-size:36px; font-weight:700; color:#2c3e50; margin-bottom:24px;'>Metadata Viewer</div>",
     unsafe_allow_html=True
