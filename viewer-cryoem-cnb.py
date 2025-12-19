@@ -5,7 +5,7 @@ from PIL import Image
 import base64
 from io import BytesIO
 
-# --- ESTILOS PERSONALIZADOS ---
+# --- STYLES ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
@@ -75,7 +75,7 @@ tooltips = {
     'particles_mic_examples': 'Micrographs are shown in decreasing order of particle number'
 }
 
-# --- FUNCIONES AUXILIARES ---
+
 def image_to_base64(image_path):
     img = Image.open(image_path)
     buffered = BytesIO()
@@ -96,7 +96,6 @@ def format_key(key: str) -> str:
 def display_node(key, value, level=0, is_last=True):
     tooltip = tooltips.get(key.lower(), "")
 
-    # --- Títulos personalizados ---
     if key.lower() == "classes2d":
         formatted_key = "Classes 2D"
     elif key.lower() == "classes3d":
@@ -104,7 +103,7 @@ def display_node(key, value, level=0, is_last=True):
     else:
         formatted_key = format_key(key)
 
-    # --- Nivel 0 (Processing): caja principal ---
+    # --- Level 0 (Processing) ---
     if level == 0:
         st.markdown(
             f"<div style='background:#dce6f0; padding:16px; margin-bottom:20px; "
@@ -120,7 +119,7 @@ def display_node(key, value, level=0, is_last=True):
         st.markdown("</div>", unsafe_allow_html=True)
         return
 
-    # --- Nivel 1 (movies, CTFs, etc.): caja secundaria ---
+    # --- Level 1 (movies, CTFs, etc.) ---
     if level == 1:
         st.markdown(
             f"<div style='background:#f5f7fa; padding:12px; margin-bottom:16px; "
@@ -141,7 +140,7 @@ def display_node(key, value, level=0, is_last=True):
         st.markdown("</div>", unsafe_allow_html=True)
         return
 
-    # --- Niveles > 1: árbol normal (con indentación y prefijo) ---
+    # --- Levels > 1 ---
     prefix = get_prefix(level, is_last)
 
     if isinstance(value, dict):
