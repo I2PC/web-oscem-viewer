@@ -168,7 +168,7 @@ def display_node(key, value, level=0, is_last=True):
                 display_node(f"{key} [{i}]", item, level + 1, i == len(value) - 1)
 
     elif isinstance(value, str) and value.lower().endswith(".jpg"):
-        img_path = data_dir / value
+        img_path = Path(value)
         if img_path.exists():
             img_base64 = image_to_base64(img_path)
             img_html = f"<img src='data:image/jpeg;base64,{img_base64}' class='zoom-img' alt='{value}'>"
@@ -198,11 +198,10 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-data_dir = Path(args.data)
-yaml_path = data_dir / "Processing_metadata.yaml"
+yaml_path = Path(args.data)
 
 if not yaml_path.exists():
-    st.error(f"YAML file not found in {data_dir}")
+    st.error(f"YAML file not found in {yaml_path}")
     st.stop()
 st.markdown(
     "<div style='font-size:36px; font-weight:700; color:#2c3e50; margin-bottom:24px;'>Metadata Viewer</div>",

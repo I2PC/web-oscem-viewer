@@ -1,9 +1,111 @@
+acquisition:
+  beamshift:
+    x_max:
+      value: 0.4549254775047302
+      unit: um
+    x_min:
+      value: -0.4574643969535828
+      unit: um
+    y_max:
+      value: 0.4304858148097992
+      unit: um
+    y_min:
+      value: -0.4241772592067719
+      unit: um
+
+  beamtilt:
+    x_max:
+      value: -0.019113270565867424
+      unit: mrad
+    y_max:
+      value: -0.0031685195863246918
+      unit: mrad
+
+  binning_camera: 1
+
+  calibrated_defocus:
+    maximal:
+      value: -3821.2554651999994
+      unit: nm
+    minimal:
+      value: -9221.6901804
+      unit: nm
+
+  date_time: "2025-06-06T18:30:35+02:00"
+  detector: Falcon 4i
+
+  dose_per_movie:
+    value: 27.43231597299625
+    unit: "1/Å^2"
+
+  exposure_time:
+    value: 4.332644244966862
+    unit: s
+
+  gainref_flip_rotate: "0,0,0"
+
+  image_size:
+    height: 4096
+    width: 4096
+
+  images_generated: 6352
+
+  imageshift:
+    x_max:
+      value: 0
+      unit: um
+    x_min:
+      value: 0
+      unit: um
+    y_max:
+      value: 0
+      unit: um
+    y_min:
+      value: 0
+      unit: um
+
+  microscope_software: EPU
+
+  nominal_defocus:
+    maximal:
+      value: -800
+      unit: nm
+    minimal:
+      value: -2400
+      unit: nm
+
+  nominal_magnification: 120000
+
+  pixel_size:
+    value: 0.8518123012501988
+    unit: "Å"
+
+  specialist_optics:
+    phaseplate:
+      used: false
+
+instrument:
+  acceleration_voltage:
+    value: 200
+    unit: kV
+
+  c2_aperture:
+    value: 30
+    unit: um
+
+  cs:
+    value: 2.7
+    unit: mm
+
+  electron_source: FieldEmission
+  imaging: BrightField
+  microscope: TALOS-D3558
 processing:
   movies:
       dose_per_image:
           value: 0.64
           unit: e/Å²
-      gain_image: gain.jpg
+      gain_image: data/gain.jpg
       descriptors:
       -   descriptor_name: XmippProtFlexAlign
           descriptor_thing:
@@ -36,7 +138,7 @@ processing:
               output_max_shift:
                   value: 29.7
                   unit: Å
-              shift_histogram: shift_hist.jpg
+              shift_histogram: data/shift_hist.jpg
   micrographs:
       number_micrographs: 21
   CTFs:
@@ -51,8 +153,8 @@ processing:
           output_avg_defocus:
               value: 9424.5
               unit: Å
-          defocus_histogram: defocus_hist.jpg
-          micrograph_examples: Micro_examples/micro_defocus.jpg
+          defocus_histogram: data/defocus_hist.jpg
+          micrograph_examples: data/Micro_examples/micro_defocus.jpg
       resolution:
           output_min_resolution:
               value: 3.9
@@ -63,14 +165,14 @@ processing:
           output_avg_resolution:
               value: 3.3
               unit: Å
-          resolution_histogram: resolution_hist.jpg
+          resolution_histogram: data/resolution_hist.jpg
       astigmatism:
-          astigmatism_histogram: astigmatism_hist.jpg
+          astigmatism_histogram: data/astigmatism_hist.jpg
   coordinates:
       number_particles: 2937
       particles_per_micrograph: 139.9
-      particles_histogram: particles_hist.jpg
-      micrograph_examples: Micro_examples/micro_particles.jpg
+      particles_histogram: data/particles_hist.jpg
+      micrograph_examples: data/Micro_examples/micro_particles.jpg
   classes2D:
       particles_per_class:
       - 333
@@ -93,31 +195,31 @@ processing:
       - 59
       - 27
       - 20
-      images_classes_2D: classes_2D.jpg
+      images_classes_2D: data/classes_2D.jpg
   classes3D:
       particles_per_class:
       - 2937
-      images_classes_3D: Classes_3D/classes_3D.jpg
+      images_classes_3D: data/Classes_3D/classes_3D.jpg
       volumes:
       -   orthogonal_slices:
-              orthogonal_slices_X: Classes_3D/orthogonal_slices_volume1/orthogonal_slices_X.jpg
-              orthogonal_slices_Y: Classes_3D/orthogonal_slices_volume1/orthogonal_slices_Y.jpg
-              orthogonal_slices_Z: Classes_3D/orthogonal_slices_volume1/orthogonal_slices_Z.jpg
+              orthogonal_slices_X: data/Classes_3D/orthogonal_slices_volume1/orthogonal_slices_X.jpg
+              orthogonal_slices_Y: data/Classes_3D/orthogonal_slices_volume1/orthogonal_slices_Y.jpg
+              orthogonal_slices_Z: data/Classes_3D/orthogonal_slices_volume1/orthogonal_slices_Z.jpg
           isosurface_images:
-              front_view: Classes_3D/isosurface_images_volume1/front_view.jpg
-              side_view: Classes_3D/isosurface_images_volume1/side_view.jpg
-              top_view: Classes_3D/isosurface_images_volume1/top_view.jpg
+              front_view: data/Classes_3D/isosurface_images_volume1/front_view.jpg
+              side_view: data/Classes_3D/isosurface_images_volume1/side_view.jpg
+              top_view: data/Classes_3D/isosurface_images_volume1/top_view.jpg
   volumes:
   -   volume_type: initial volume
       size: [250, 250, 250]
       orthogonal_slices:
-          orthogonal_slices_X: Initial_volume/orthogonal_slices/orthogonal_slices_X.jpg
-          orthogonal_slices_Y: Initial_volume/orthogonal_slices/orthogonal_slices_Y.jpg
-          orthogonal_slices_Z: Initial_volume/orthogonal_slices/orthogonal_slices_Z.jpg
+          orthogonal_slices_X: data/Initial_volume/orthogonal_slices/orthogonal_slices_X.jpg
+          orthogonal_slices_Y: data/Initial_volume/orthogonal_slices/orthogonal_slices_Y.jpg
+          orthogonal_slices_Z: data/Initial_volume/orthogonal_slices/orthogonal_slices_Z.jpg
       isosurface_images:
-          front_view: Initial_volume/isosurface_images/front_view.jpg
-          side_view: Initial_volume/isosurface_images/side_view.jpg
-          top_view: Initial_volume/isosurface_images/top_view.jpg
+          front_view: data/Initial_volume/isosurface_images/front_view.jpg
+          side_view: data/Initial_volume/isosurface_images/side_view.jpg
+          top_view: data/Initial_volume/isosurface_images/top_view.jpg
   -   volume_type: final volume
       number_particles: 2937
       resolution:
@@ -125,20 +227,20 @@ processing:
           unit: Å
       size: [250, 250, 250]
       orthogonal_slices:
-          orthogonal_slices_X: Final_volume/orthogonal_slices/orthogonal_slices_X.jpg
-          orthogonal_slices_Y: Final_volume/orthogonal_slices/orthogonal_slices_Y.jpg
-          orthogonal_slices_Z: Final_volume/orthogonal_slices/orthogonal_slices_Z.jpg
+          orthogonal_slices_X: data/Final_volume/orthogonal_slices/orthogonal_slices_X.jpg
+          orthogonal_slices_Y: data/Final_volume/orthogonal_slices/orthogonal_slices_Y.jpg
+          orthogonal_slices_Z: data/Final_volume/orthogonal_slices/orthogonal_slices_Z.jpg
       isosurface_images:
-          front_view: Final_volume/isosurface_images/front_view.jpg
-          side_view: Final_volume/isosurface_images/side_view.jpg
-          top_view: Final_volume/isosurface_images/top_view.jpg
+          front_view: data/Final_volume/isosurface_images/front_view.jpg
+          side_view: data/Final_volume/isosurface_images/side_view.jpg
+          top_view: data/Final_volume/isosurface_images/top_view.jpg
   -   volume_type: sharpened volume
       size: [250, 250, 250]
       orthogonal_slices:
-          orthogonal_slices_X: Sharpened_volume/orthogonal_slices/orthogonal_slices_X.jpg
-          orthogonal_slices_Y: Sharpened_volume/orthogonal_slices/orthogonal_slices_Y.jpg
-          orthogonal_slices_Z: Sharpened_volume/orthogonal_slices/orthogonal_slices_Z.jpg
+          orthogonal_slices_X: data/Sharpened_volume/orthogonal_slices/orthogonal_slices_X.jpg
+          orthogonal_slices_Y: data/Sharpened_volume/orthogonal_slices/orthogonal_slices_Y.jpg
+          orthogonal_slices_Z: data/Sharpened_volume/orthogonal_slices/orthogonal_slices_Z.jpg
       isosurface_images:
-          front_view: Sharpened_volume/isosurface_images/front_view.jpg
-          side_view: Sharpened_volume/isosurface_images/side_view.jpg
-          top_view: Sharpened_volume/isosurface_images/top_view.jpg
+          front_view: data/Sharpened_volume/isosurface_images/front_view.jpg
+          side_view: data/Sharpened_volume/isosurface_images/side_view.jpg
+          top_view: data/Sharpened_volume/isosurface_images/top_view.jpg
